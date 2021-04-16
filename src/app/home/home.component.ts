@@ -3,6 +3,7 @@ import { RadSideDrawer } from 'nativescript-ui-sidedrawer'
 import { Application } from '@nativescript/core'
 import { Canvas, CanvasView, createRect, Paint } from '@nativescript-community/ui-canvas';
 import { Color } from '@nativescript/core';
+import {exit} from 'nativescript-exit';
 
 import { registerElement } from "@nativescript/angular";
 registerElement("CanvasView", () => CanvasView);
@@ -23,6 +24,10 @@ export class HomeComponent implements OnInit {
   onDrawerButtonTap(): void {
     const sideDrawer = <RadSideDrawer>Application.getRootView()
     sideDrawer.showDrawer()
+  }
+
+  onExitTapped(): void {
+    exit();
   }
 
   draw(event: { canvas: Canvas }) {
