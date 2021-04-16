@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer'
 import { Application } from '@nativescript/core'
+import { Canvas, CanvasView, createRect, Paint } from '@nativescript-community/ui-canvas';
+import { Color } from '@nativescript/core';
+
+import { registerElement } from "@nativescript/angular";
+registerElement("CanvasView", () => CanvasView);
 
 @Component({
   selector: 'Home',
@@ -18,5 +23,12 @@ export class HomeComponent implements OnInit {
   onDrawerButtonTap(): void {
     const sideDrawer = <RadSideDrawer>Application.getRootView()
     sideDrawer.showDrawer()
+  }
+
+  draw(event: { canvas: Canvas }) {
+    const paint = new Paint();
+    paint.setColor(new Color("black"));
+    paint.strokeWidth = 10;
+    event.canvas.drawRect(createRect(0, 0, 200, 100), paint);
   }
 }
