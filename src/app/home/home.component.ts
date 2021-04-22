@@ -9,11 +9,10 @@ import {
 } from "@nativescript-community/ui-canvas";
 import { Color } from "@nativescript/core";
 import { exit } from "nativescript-exit";
-
-import {DownloadManager} from 'nativescript-downloadmanager'
-
 import { registerElement } from "@nativescript/angular";
-import { HttpClient } from "@angular/common/http";
+
+import { Http } from '@nativescript/core'
+
 registerElement("CanvasView", () => CanvasView);
 
 @Component({
@@ -21,7 +20,7 @@ registerElement("CanvasView", () => CanvasView);
   templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
-  constructor(private httpClient: HttpClient) {
+  constructor() {
     // Use the component constructor to inject providers.
   }
 
@@ -32,14 +31,19 @@ export class HomeComponent implements OnInit {
   }
 
   testDownload(): void {
-      this.httpClient.get("https://cachefly.cachefly.net/10mb.test").subscribe(
-        (result) => {
-          console.log('File downloaded: ' + result);
-        },
-      (err) => {
-        console.error('Failed to download file');
-        console.dir(err);
-      })
+
+    const url1= "https://cachefly.cachefly.net/10mb.test";
+    const url2= "https://d1lfyz5kwt8vu9.cloudfront.net/nativescript-logo-2021.png";
+
+    Http.getFile(url1).then(
+      resultFile => {
+        // The returned result will be File object
+        console.log('File downloaded');
+      },
+      e => {
+        console.dir(e);
+      }
+    )
   }
 
   onDrawerButtonTap(): void {
