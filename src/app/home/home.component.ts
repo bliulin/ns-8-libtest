@@ -11,6 +11,8 @@ import { Color } from "@nativescript/core";
 import { exit } from "nativescript-exit";
 import { registerElement } from "@nativescript/angular";
 
+import { Feedback, FeedbackPosition, FeedbackType } from 'nativescript-feedback';
+
 import { Http } from '@nativescript/core'
 
 registerElement("CanvasView", () => CanvasView);
@@ -28,6 +30,19 @@ export class HomeComponent implements OnInit {
     // Init your component properties here.
 
     this.testDownload();
+
+    var feedback = new Feedback();
+
+    feedback.show({
+      title: "Custom colors :)",
+      titleColor: new Color("black"),
+      message: "Custom text colors and background color.",
+      messageColor: new Color("#516a78"),
+      duration: 2500,
+      type: FeedbackType.Success,
+      backgroundColor: new Color("lightskyblue"),
+      onTap: () => console.log("showSuccessAltColor tapped")
+    });
   }
 
   testDownload(): void {
