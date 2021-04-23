@@ -11,9 +11,13 @@ import { Color } from "@nativescript/core";
 import { exit } from "nativescript-exit";
 import { registerElement } from "@nativescript/angular";
 
-import { Feedback, FeedbackPosition, FeedbackType } from 'nativescript-feedback';
+import {
+  Feedback,
+  FeedbackPosition,
+  FeedbackType
+} from "nativescript-feedback";
 
-import { Http } from '@nativescript/core'
+import { Http } from "@nativescript/core";
 
 registerElement("CanvasView", () => CanvasView);
 
@@ -22,7 +26,6 @@ registerElement("CanvasView", () => CanvasView);
   templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
-
   private feedback = new Feedback();
 
   constructor() {
@@ -33,9 +36,6 @@ export class HomeComponent implements OnInit {
     // Init your component properties here.
 
     this.testDownload();
-
-
-
 
     // this.feedback.show({
     //   title: "Custom colors :)",
@@ -50,19 +50,19 @@ export class HomeComponent implements OnInit {
   }
 
   testDownload(): void {
-
-    const url1= "https://cachefly.cachefly.net/10mb.test";
-    const url2= "https://d1lfyz5kwt8vu9.cloudfront.net/nativescript-logo-2021.png";
+    const url1 = "https://cachefly.cachefly.net/10mb.test";
+    const url2 =
+      "https://d1lfyz5kwt8vu9.cloudfront.net/nativescript-logo-2021.png";
 
     Http.getFile(url1).then(
       resultFile => {
         // The returned result will be File object
-        console.log('File downloaded');
+        console.log("File downloaded");
       },
       e => {
         console.dir(e);
       }
-    )
+    );
   }
 
   onDrawerButtonTap(): void {
@@ -85,5 +85,71 @@ export class HomeComponent implements OnInit {
     paint.setColor(new Color("black"));
     paint.strokeWidth = 10;
     event.canvas.drawRect(createRect(0, 0, 200, 100), paint);
+  }
+
+  chartOptions = {
+    chart: {
+      type: "column"
+    },
+    title: {
+      text: "Stacked column chart"
+    },
+    xAxis: {
+      categories: ["Apples", "Oranges", "Pears", "Grapes", "Bananas"]
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: "Total fruit consumption"
+      },
+      stackLabels: {
+        enabled: true,
+        style: {
+          fontWeight: "bold",
+          color: "gray"
+        }
+      }
+    },
+    legend: {
+      align: "right",
+      x: -30,
+      verticalAlign: "top",
+      y: 25,
+      floating: true,
+      backgroundColor: "white",
+      borderColor: "#CCC",
+      borderWidth: 1,
+      shadow: false
+    },
+    tooltip: {
+      headerFormat: "<b>{point.x}</b><br/>",
+      pointFormat: "{series.name}: {point.y}<br/>Total: {point.stackTotal}"
+    },
+    plotOptions: {
+      column: {
+        stacking: "normal",
+        dataLabels: {
+          enabled: true
+        }
+      }
+    },
+    series: [
+      {
+        name: "John",
+        data: [5, 3, 4, 7, 2]
+      },
+      {
+        name: "Jane",
+        data: [2, 2, 3, 2, 1]
+      },
+      {
+        name: "Joe",
+        data: [3, 4, 4, 2, 5]
+      }
+    ]
+  };
+
+  get chartOptionsString(): string {
+    return JSON.stringify(this.chartOptions);
   }
 }

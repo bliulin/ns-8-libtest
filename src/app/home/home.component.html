@@ -9,14 +9,16 @@
 
 <StackLayout class="page__content">
   <Label class="page__content-icon fas" text="&#xf015;"></Label>
-  <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+  <Label class="page__content-placeholder" text="<!-- Test libraries using Nativescript 8 -->"></Label>
 
   <Button style="color: red" (tap)="onExitTapped()" text="Exit app"></Button>
 
   <Button style="color: black" (tap)="onShowToastMessage()" text="Show toast message"></Button>
 
-  <svg:SVGImage src="https://media4.giphy.com/media/3uyIgVxP1qAjS/200.svg" height="200" />
+  <!-- <SVGImage src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/DroidSerif-Bold.svg" width="256" height="256"></SVGImage> -->
 
   <CanvasView width="100" height="100" (draw)="draw($event)"></CanvasView>
+
+  <Highcharts options="{{chartOptionsString}}"></Highcharts>
 
 </StackLayout>
