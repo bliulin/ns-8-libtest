@@ -22,6 +22,9 @@ registerElement("CanvasView", () => CanvasView);
   templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
+
+  private feedback = new Feedback();
+
   constructor() {
     // Use the component constructor to inject providers.
   }
@@ -31,18 +34,19 @@ export class HomeComponent implements OnInit {
 
     this.testDownload();
 
-    var feedback = new Feedback();
 
-    feedback.show({
-      title: "Custom colors :)",
-      titleColor: new Color("black"),
-      message: "Custom text colors and background color.",
-      messageColor: new Color("#516a78"),
-      duration: 2500,
-      type: FeedbackType.Success,
-      backgroundColor: new Color("lightskyblue"),
-      onTap: () => console.log("showSuccessAltColor tapped")
-    });
+
+
+    // this.feedback.show({
+    //   title: "Custom colors :)",
+    //   titleColor: new Color("black"),
+    //   message: "Custom text colors and background color.",
+    //   messageColor: new Color("#516a78"),
+    //   duration: 2500,
+    //   type: FeedbackType.Success,
+    //   backgroundColor: new Color("lightskyblue"),
+    //   onTap: () => console.log("showSuccessAltColor tapped")
+    // });
   }
 
   testDownload(): void {
@@ -68,6 +72,12 @@ export class HomeComponent implements OnInit {
 
   onExitTapped(): void {
     exit();
+  }
+
+  onShowToastMessage(): void {
+    this.feedback.show({
+      message: "Easiest thing ever, right????"
+    });
   }
 
   draw(event: { canvas: Canvas }) {
